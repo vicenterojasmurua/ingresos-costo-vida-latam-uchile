@@ -1,4 +1,4 @@
-# Análisis de Ingresos y Costo de Vida en Chile 📊
+# Análisis de Ingresos y Costo de Vida en Chile, Brasil y Argentina 📊
 
 ![Stata version](https://img.shields.io/badge/Stata-17.0+-blue)
 ![R version](https://img.shields.io/badge/R-4.3.0+-blue)
