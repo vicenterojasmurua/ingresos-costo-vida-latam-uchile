@@ -2,7 +2,7 @@
 * PROYECTO: Tesis de Licenciatura en Sociología
 * AUTOR: Vicente Rojas
 * INSTITUCIÓN: Universidad de Chile - Facultad de Ciencias Sociales
-* MÓDULO 01: Carga, Procesamiento de Datos y Exportación a LaTeX (Overleaf)
+* CHILE: CASEN 2024, procesamiento descriptivo y exportación de resultados
 * ==============================================================================
 
 * ------------------------------------------------------------------------------
@@ -24,8 +24,14 @@ version 17
 * Establece la semilla aleatoria para replicar resultados exactos
 set seed 20260822
 
-* Cambia el directorio de trabajo a la carpeta del proyecto
-cd "C:\Users\vroja\OneDrive\Escritorio\VIRTUAL STUDIO CODE\ingresos-costo-vida-chile"
+* Ejecutar este do-file desde la raíz del repositorio
+local project_root "`c(pwd)'"
+capture confirm file "`project_root'\data\raw\chile\casen_2024.dta"
+if _rc {
+    display as error "Ejecute el do-file desde la raíz del proyecto."
+    display as error "No se encontró data/raw/chile/casen_2024.dta."
+    exit 601
+}
 
 * Crea automáticamente las carpetas del proyecto si aún no existen
 capture mkdir "logs"
@@ -57,7 +63,7 @@ display "Inicio de ejecucion: " c(current_date) " " c(current_time)
 * ------------------------------------------------------------------------------
 
 * Revisa si los paquetes estout y outreg2 están instalados; si no, los instala automáticamente
-local packages estout outreg2
+local packages estout
 foreach pkg in `packages' {
     capture which `pkg'
     if _rc != 0 {
@@ -70,14 +76,11 @@ foreach pkg in `packages' {
 * 3. CARGA DE DATOS
 * ------------------------------------------------------------------------------
 
-* Carga la base de datos principal de Chile (CASEN 2024)
-use "data/raw/chile/casen_2024.dta", clear
+* Carga la base de datos de Chile (CASEN 2024)
+use "`project_root'\data\raw\chile\casen_2024.dta", clear
 
-* NOTA: Las bases de Argentina y Brasil se dejan comentadas temporalmente 
-* para no sobrecargar la memoria RAM durante las pruebas del Módulo 01.
-* import excel "data/raw/argentina/usu_hogar_T126.xlsx", firstrow clear
-* save "data/processed/argentina/usu_hogar_T126.dta", replace
-* import delimited "data/raw/brasil/PNADC_012026.txt", clear
+* Este do-file produce resultados de CASEN únicamente.
+* PNAD Contínua y EPH requieren flujos de importación y armonización separados.
 
 * ------------------------------------------------------------------------------
 * 4. LIMPIEZA, FILTRADO Y CREACIÓN DE VARIABLES

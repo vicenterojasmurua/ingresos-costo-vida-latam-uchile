@@ -1,31 +1,39 @@
 \section{Método}
 
-El proyecto adoptará un diseño metodológico cuantitativo y comparativo. El entorno de desarrollo principal será Visual Studio Code integrado con el lenguaje R para la programación estadística, empleando GitHub como repositorio centralizado para garantizar el control de versiones y la reproducibilidad de la investigación.
+La investigación utiliza un diseño cuantitativo, transversal y comparativo de casos. El análisis integra microdatos oficiales de hogares y medidas documentadas de costo de vida para Chile, Brasil y Argentina. Dado que los períodos y las coberturas territoriales disponibles son distintos, se analizarán cortes por país y encuesta, no una serie temporal armonizada ni observaciones simultáneas. El flujo inicial utiliza CASEN con cobertura nacional, PNAD 2025 restringida a capitales estatales y EPH 1T2026 limitada al Gran Buenos Aires; PNAD 1T2026 requiere documentación específica antes de incorporarse. R será el entorno principal de procesamiento y análisis; Stata se conservará para el procesamiento reproducible de CASEN actualmente implementado.
 
-\subsection{Fases del Procesamiento Metodológico}
-La estrategia de análisis se estructurará en tres fases secuenciales:
+\subsection{Procedimiento}
+El trabajo se organizará en cuatro etapas:
 \begin{enumerate}
-    \item \textbf{Rastreo, Limpieza y Armonización}: Extracción y estandarización de microdatos desde formatos heterogéneos (\texttt{.txt} para \textit{PNAD Contínua}, \texttt{.xlsx} para \textit{EPH} y \texttt{.dta} para \textit{CASEN}).
-    \item \textbf{Integración de Series de Precios}: Deflactación de los ingresos monetarios del hogar utilizando las series históricas del Índice de Precios al Consumidor (IPC) y el valor de las canastas básicas (CBA y CBT) para estimar valores reales de poder adquisitivo.
-    \item \textbf{Análisis Estadístico Comparativo}: Aplicación de técnicas de estadística descriptiva e inferencial en series de tiempo (2015--2025) para comparar la trayectoria de la vulnerabilidad socioeconómica y la erosión del ingreso entre quintiles.
+    \item \textbf{Inventario y evaluación}: registrar la fuente, período, universo, cobertura geográfica, diseño muestral, unidad de observación y conceptos de ingreso de cada encuesta.
+    \item \textbf{Armonización}: construir variables comunes únicamente cuando sus definiciones oficiales sean suficientemente equivalentes. Mantener las variables originales y las transformaciones específicas de cada país para que las decisiones sean auditables.
+    \item \textbf{Integración del costo de vida}: incorporar valores mensuales de canastas o indicadores seleccionados, registrando si son oficiales o independientes y su cobertura. No equiparar directamente canastas nacionales con definiciones o coberturas distintas.
+    \item \textbf{Análisis y comparación}: calcular estadísticas descriptivas con los ponderadores de cada encuesta y presentar resultados por país, junto con sus períodos, unidades y limitaciones.
 \end{enumerate}
 
 \subsection{Operacionalización de Variables}
 \begin{itemize}
-    \item \textbf{Ingreso Monetario Total del Hogar}: Suma de los ingresos del trabajo (asalariado e independiente), jubilaciones/pensiones (contributivas y asistenciales) y transferencias o subsidios estatales. Para asegurar comparabilidad estricta y evitar distorsiones metodológicas, se aplican como límites la exclusión del alquiler imputado y de los ingresos no monetarios.
-    \item \textbf{Costo de Vida}: Medido a nivel de hogar tomando como referencia la Canasta Básica Alimentaria (CBA) y la Canasta Básica Total (CBT), indexadas mediante el comportamiento del IPC oficial de cada economía.
-    \item \textbf{Indicadores a Construir}: Se evaluará la construcción de un \textit{Índice de Capacidad de Compra Comparada del Hogar} y un \textit{Indicador de Cobertura de la Canasta Básica} (número de canastas que puede adquirir un hogar según su quintil).
+    \item \textbf{Ingreso monetario del hogar}: medida mensual de ingreso total disponible definida a partir de cada encuesta. Se registrará qué componentes incluye cada fuente; no se afirmará que los conceptos son idénticos si la documentación no lo respalda.
+    \item \textbf{Ingreso per cápita o equivalente}: ingreso monetario del hogar dividido por la unidad de análisis requerida por la fuente de costo de vida. Se conservarán las escalas oficiales de equivalencia y no se equiparará adulto equivalente con persona sin justificación.
+    \item \textbf{Costo de la canasta}: valor mensual conservando el nombre, la unidad, el territorio, la fuente y la definición de cada indicador. La CBA chilena se expresa por persona; la CBA/CBT argentina se expresa por adulto equivalente y refiere al Gran Buenos Aires; la canasta DIEESE es independiente y se publica por capital.
+    \item \textbf{Razón de cobertura}: ingreso dividido por el costo de canasta en una unidad equivalente, calculada solo cuando período, cobertura territorial y unidad sean compatibles. Una razón de 1 representa el costo de una canasta local; no implica que las canastas sean equivalentes entre países.
+    \item \textbf{Resultados distributivos}: proporción ponderada de hogares bajo el umbral local y estadísticos descriptivos por grupos, usando el diseño y ponderador de cada encuesta. Las comparaciones serán descriptivas y no se tratarán como pruebas de diferencias estadísticas entre muestras independientes.
 \end{itemize}
 
-\subsection{Fuentes de Datos y Repositorios}
+\subsection{Fuentes y períodos observados}
 \begin{itemize}
-    \item \textbf{Chile}: Encuesta \textit{CASEN} (Observatorio Social, MIDES) vinculada a series de Canasta Básica e informes de IPC del Instituto Nacional de Estadísticas (INE).
-    \item \textbf{Brasil}: Microdatos de la \textit{PNAD Contínua} del IBGE, complementados con series del IPCA e INPC.
-    \item \textbf{Argentina}: Encuesta Permanente de Hogares (\textit{EPH}) cruzada con informes de CBA, CBT e IPC del INDEC.
+    \item \textbf{Chile}: microdatos de \textit{CASEN 2024}; microdatos de gasto y personas de la \textit{IX Encuesta de Presupuestos Familiares (EPF 2021--2022)}; serie mensual de CBA del Ministerio de Desarrollo Social y Familia. La metodología de pobreza por ingresos se actualizó en 2026 y debe considerarse cualquier quiebre de serie.
+    \item \textbf{Brasil}: microdatos de la \textit{PNAD Contínua} 2025, visita 1; el flujo inicial retiene hogares de capitales estatales identificados con \texttt{V1023} y la UF, usa \texttt{V1032} y construye el ingreso total a partir del ingreso domiciliario per cápita \texttt{VD5002} y el tamaño \texttt{V2001}. El archivo del primer trimestre de 2026 requiere su diccionario propio y no se procesa con el esquema anual 2025. Como referencia de canasta se propone la cesta DIEESE por capital, una fuente independiente. El IPCA de alimentación en el hogar del IBGE es un índice de variación de precios, no un costo de canasta.
+    \item \textbf{Argentina}: microdatos de hogares e individuos de la \textit{EPH, primer trimestre de 2026}, encuesta urbana por aglomerados; el flujo inicial limita el análisis al Gran Buenos Aires (\texttt{REGION=01}) para concordar territorialmente con la serie mensual de CBA/CBT del INDEC, y usa ingreso familiar \texttt{ITF}, tamaño \texttt{IX\_TOT} y ponderador \texttt{PONDIH}.
+    \item \textbf{Canastas y precios}: los archivos locales no incluyen aún estas series. Deben incorporarse con documentación y cobertura verificadas antes de estimar cobertura.
 \end{itemize}
 
-El control de versiones del código se gestiona a través del repositorio público en GitHub:
-(\url{https://github.com/vicenterojasmurua/ingresos-costo-vida-chile}) y la documentación en Google Drive.
+\subsection{Armonización inicial}
+El script \texttt{scripts/01\_data\_analysis/r/01\_harmonize\_households.R} genera una base local por país, con una fila por hogar, ingreso mensual, tamaño, ingreso per cápita, ponderador, período y geografía. Para CASEN 2024 utiliza \texttt{folio}, \texttt{ytotcorh}, \texttt{numper} y \texttt{expr}; cuando el archivo contiene registros repetidos por persona, verifica la consistencia de las variables del hogar y conserva el ingreso observado no faltante. Para la EPH identifica hogares mediante \texttt{CODUSU} y \texttt{NRO\_HOGAR}. Las bases armonizadas son insumos descriptivos y no sustituyen las variables, ponderadores ni diseños muestrales originales.
 
-\subsection{Limitaciones Metodológicas}
-Se contemplan limitaciones inherentes a los datos: la asimetría temporal en los levantamientos (datos trimestrales/anuales en EPH y PNAD frente a bianuales/trianuales en CASEN), posibles sesgos por subdeclaración de ingresos y la heterogeneidad geográfica de precios intra-país.
+\subsection{Comparabilidad, inferencia y ética}
+Los valores monetarios nominales de monedas distintas no se compararán directamente. La razón de cobertura expresa cuántas unidades de la canasta local puede adquirir el ingreso bajo sus propias definiciones; no elimina diferencias de calidad, contenido, territorio o método de cálculo entre canastas. La canasta DIEESE no tiene el mismo estatus que las líneas oficiales de Chile y Argentina.
+
+El diseño es transversal y los períodos difieren entre fuentes. No permite atribuir efectos causales a la inflación, las transferencias o las instituciones ni describir una trayectoria común. Persisten posibles problemas de subdeclaración, no respuesta, informalidad, cambios metodológicos y heterogeneidad de precios dentro de cada país. Las estimaciones inferenciales se realizarán dentro de cada encuesta respetando su diseño muestral.
+
+Los microdatos se obtuvieron para análisis local y no se incluyen en el repositorio. Se respetarán las condiciones de uso y confidencialidad establecidas por CASEN, IBGE e INDEC. El código y la documentación del proyecto se publican en GitHub; las salidas compartidas no deben permitir identificar personas ni hogares.

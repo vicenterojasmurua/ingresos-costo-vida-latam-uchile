@@ -1,7 +1,14 @@
-# Instalar paquetes requeridos si no están presentes:
-if (!require("DiagrammeR")) install.packages("DiagrammeR")
-if (!require("DiagrammeRsvg")) install.packages("DiagrammeRsvg")
-if (!require("rsvg")) install.packages("rsvg")
+required_packages <- c("DiagrammeR", "DiagrammeRsvg", "rsvg")
+missing_packages <- required_packages[
+  !vapply(required_packages, requireNamespace, logical(1), quietly = TRUE)
+]
+if (length(missing_packages) > 0) {
+  stop(
+    "Restaure las dependencias del proyecto; faltan: ",
+    paste(missing_packages, collapse = ", "),
+    call. = FALSE
+  )
+}
 
 library(DiagrammeR)
 library(DiagrammeRsvg)
@@ -10,8 +17,14 @@ library(rsvg)
 # Cargar métricas exportadas
 metrics <- readRDS("output/prisma_metrics.rds")
 
-# Forzar el valor final de incluidos a 104
-metrics$n_incluidos_final <- 104
+if (!"n_incluidos_final" %in% names(metrics)) {
+  stop("Las métricas no incluyen el estado de selección a texto completo.", call. = FALSE)
+}
+incluidos_label <- if (is.na(metrics$n_incluidos_final)) {
+  "pendiente de verificación"
+} else {
+  as.character(metrics$n_incluidos_final)
+}
 
 # Construir diagrama Graphviz
 dot_code <- sprintf("
@@ -30,14 +43,14 @@ digraph prisma {
     label = 'Cribado (Screening)';
     style = dashed; color = gray;
     node3 [label = 'Registros examinados por título/resumen\\n(n = %d)'];
-    node4 [label = 'Registros excluidos por criterio de irrelevancia\\n(n = %d)'];
+    node4 [label = 'Registros excluidos por el filtro automatizado\\n(n = %d)'];
   }
   
   subgraph cluster_elig {
     label = 'Elegibilidad e Inclusión';
     style = dashed; color = gray;
-    node5 [label = 'Estudios con DOI recuperados para evaluación\\n(n = %d)'];
-    node6 [label = 'Estudios incluidos en la síntesis\\n(n = %d)'];
+    node5 [label = 'Registros retenidos para revisión manual\\n(n = %d)'];
+    node6 [label = 'Estudios incluidos tras revisión a texto completo\\n(n = %s)'];
   }
   
   node1 -> node3;
@@ -47,14 +60,14 @@ digraph prisma {
   node5 -> node6;
 }
 ", metrics$n_identificados, metrics$n_duplicados, metrics$n_cribados_tit_abs,
-  metrics$n_excluidos_tit_abs, metrics$n_elegibles_doi, metrics$n_incluidos_final)
+  metrics$n_excluidos_tit_abs, metrics$n_retenidos_automatizacion, incluidos_label)
 
 # Renderizar y guardar gráficos
 graph <- grViz(dot_code)
 svg_code <- export_svg(graph)
 
 # Guardar en formatos de alta resolución
-charToRaw(svg_code) %>% rsvg_png("images/prisma-flowchart.png", width = 1800, height = 2200)
-charToRaw(svg_code) %>% rsvg_pdf("images/prisma-flowchart.pdf")
+rsvg_png(charToRaw(svg_code), "images/prisma-flowchart.png", width = 1800, height = 2200)
+rsvg_pdf(charToRaw(svg_code), "images/prisma-flowchart.pdf")
 
 cat("Diagrama PRISMA generado en 'images/prisma-flowchart.png' y 'images/prisma-flowchart.pdf'\n")

@@ -12,8 +12,8 @@ Este proyecto espera que todos los contribuyentes sean respetuosos, constructivo
 ```bash
 # Fork del repositorio en GitHub
 # Luego clona tu fork
-git clone https://github.com/TU_USUARIO/ingresos-costo-vida-chile.git
-cd ingresos-costo-vida-chile
+git clone https://github.com/vicenterojasmurua/ingresos-costo-vida-latinoamerica.git
+cd ingresos-costo-vida-latinoamerica
 ```
 
 ### 2. Crear una Rama

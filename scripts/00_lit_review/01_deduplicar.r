@@ -36,8 +36,15 @@ m_screened <- m_wos_undup
 # ==============================================================================
 # 3. Filtrado por palabras clave en Resumen (AB) y Título (TI)
 # ==============================================================================
-# Patrón alineado con la nueva cadena de búsqueda (incluye singular/plural y nuevos ejes)
-pattern <- "CASEN|PNAD|EPH|income|poverty|wage|purchasing power|cost of living|inflation|basic basket|transfer|inequality|distribution|informal"
+# Filtro automatizado multilingüe; no sustituye el cribado manual de elegibilidad.
+pattern <- paste(
+  "CASEN|PNAD|EPH|income|ingreso|renda|poverty|pobreza|wage|salario",
+  "purchasing power|poder adquisitivo|cost of living|costo de vida|custo de vida",
+  "inflation|inflación|inflação|basic basket|canasta básica|cesta básica",
+  "transfer|transferencia|transferência|inequality|desigualdad|desigualdade",
+  "distribution|distribución|distribuição|informal|food insecurity|inseguridad alimentaria",
+  sep = "|"
+)
 
 texto_busqueda <- paste(
   ifelse(is.na(m_screened$TI), "", m_screened$TI),
@@ -56,7 +63,7 @@ n_excluidos_abstract <- nrow(m_screened) - n_filtrados_abstract
 if (!dir.exists("zotero")) dir.create("zotero", recursive = TRUE)
 if (!dir.exists("output")) dir.create("output", recursive = TRUE)
 
-dois_limpios <- na.omit(m_filtered$DI)
+dois_limpios <- unique(na.omit(m_filtered$DI))
 writeLines(dois_limpios, "zotero/dois_filtrados.txt")
 saveRDS(m_filtered, "output/corpus_trinacional.rds")
 
@@ -113,8 +120,9 @@ prisma_metrics <- list(
   n_duplicados        = n_duplicados,
   n_cribados_tit_abs  = nrow(m_screened),
   n_excluidos_tit_abs = n_excluidos_abstract,
-  n_elegibles_doi     = length(dois_limpios),
-  n_incluidos_final   = length(dois_limpios)
+  n_retenidos_automatizacion = n_filtrados_abstract,
+  n_doi_disponibles   = length(dois_limpios),
+  n_incluidos_final   = NA_integer_
 )
 
 saveRDS(prisma_metrics, "output/prisma_metrics.rds")
@@ -127,5 +135,5 @@ cat("1. Registros identificados en WoS (lotes)    :", n_identificados, "\n")
 cat("2. Duplicados removidos entre lotes        :", n_duplicados, "\n")
 cat("3. Evaluados por título y resumen           :", nrow(m_screened), "\n")
 cat("4. Excluidos por irrelevancia              :", n_excluidos_abstract, "\n")
-cat("5. Registros elegibles con DOI             :", length(dois_limpios), "\n")
+cat("5. Registros con DOI disponible             :", length(dois_limpios), "\n")
 cat("========================================\n")

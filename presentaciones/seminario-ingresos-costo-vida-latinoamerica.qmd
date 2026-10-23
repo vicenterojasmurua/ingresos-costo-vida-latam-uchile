@@ -1,5 +1,6 @@
 ---
-pagetitle: "Análisis de Ingresos y Costo de Vida en Chile"
+pagetitle: "Ingresos y costo de vida en América del Sur"
+lang: es
 format:
   revealjs:
     theme: default
@@ -16,11 +17,11 @@ editor: source
 ::: title-cover
 <img src="../images/logo-sociales.png" class="logo-inline" width="250px" style="position: absolute; top: 0; right: 0;"/>
 
-<h1><strong>Ingresos<wbr> y gastos</strong></h1>
+<h1><strong>Ingresos<wbr> y costo de vida</strong></h1>
 
 <p class="cover-subtitle">
 
-<strong> Análisis de datos en Chile (Brasil y Argentina)</strong>
+<strong> Estudio comparativo de Chile, Brasil y Argentina</strong>
 
 </p>
 
@@ -28,7 +29,7 @@ editor: source
 
 <p class="title-meta">
 
-<strong>Vicente Rojas Murúa</strong><br> Seminario de investigación avanzada en desigualdad y ciudadanía.<br> Docente: J. C. Castillo, Ph.D.<br> Jueves 20 Agosto 2026, Santiago de Chile.
+<strong>Vicente Rojas Murúa</strong><br> Seminario de investigación avanzada en desigualdad y ciudadanía.<br> Docente: J. C. Castillo, Ph.D.<br> Santiago de Chile, octubre de 2026.
 
 </p>
 :::
@@ -38,43 +39,48 @@ editor: source
 :::: {.columns}
 
 ::: {.column width="50%"}
-* **1. Introducción al proyecto:** Alcance general de la investigación y justificación de la Fase 1 (Caso Chile).
+* **1. Introducción al proyecto:** Alcance comparativo y justificación de los tres casos nacionales.
 * **2. Antecedentes y Contexto:** Revisión de literatura empírica y panorama socioeconómico reciente.
 * **3. Problema de investigación:** Diagnóstico, brechas de la literatura y preguntas que guían el estudio.
 :::
 
 ::: {.column width="50%"}
-* **4. Objetivos y Metas:** Propósito del estudio regional comparado y metas específicas para esta etapa preliminar.
-* **5. Análisis y Resultados:** Exploración de microdatos y modelamiento salarial utilizando CASEN 2024.
-* **6. Próximos pasos:** Proyección metodológica hacia el análisis con Brasil (PNAD) y Argentina (EPH).
+* **4. Objetivos y Metas:** Propósito comparativo y objetivos para los tres países.
+* **5. Análisis y Resultados:** Resultados exploratorios de CASEN 2024 y estrategia para integrar EPH y PNAD Contínua.
+* **6. Alcances:** Fuentes, períodos y límites de comparabilidad.
 :::
 
 ::::
 
 ## Introducción al proyecto
 
-Esta presentación expone la **Fase 1** de un proyecto de investigación comparado sobre ingresos y costo de vida en Sudamérica (2015–2025).
+Esta investigación compara la capacidad de los hogares de **Chile, Brasil y Argentina** para cubrir el costo de una canasta básica local con sus ingresos monetarios.
 
-* **Enfoque inicial:** Análisis exclusivo del caso de **Chile** mediante los microdatos de la encuesta **CASEN 2024**.
-* **Propósito:** Establecer la línea base metodológica, calibrar los modelos salariales y explorar el ajuste por costo de vida antes de escalar el estudio a **Brasil** (PNAD) y **Argentina** (EPH).
+* **Chile:** CASEN 2024 y microdatos de gasto de la IX EPF 2021–2022.
+* **Brasil:** PNAD Contínua 2025 y primer trimestre de 2026.
+* **Argentina:** EPH del primer trimestre de 2026.
+
+Los períodos y las definiciones de las encuestas no son idénticos. El estudio presenta cortes por país y encuesta, distingue la cobertura de cada fuente y hace explícitos los límites de comparación, en vez de tratarlos como una serie temporal común.
 
 ## Antecedentes Teóricos y Empíricos {.smaller}
 
-La literatura sobre ingresos y costo de vida en Chile aborda el bienestar desde tres ejes:
+La revisión integra estudios sobre ingresos, trabajo, precios y bienestar en América Latina, junto con evidencia específica de Chile. Para organizarla se consideran tres ejes:
 
-* **Acumulación y valor de la fuerza de trabajo:** Dinámicas de acumulación de capital y desvalorización salarial que restringen el ingreso real [@durans.ChileanEconomyAnalysis2022; @durans.VerdaderosSueldosChile2024].
+* **Acumulación y valor de la fuerza de trabajo:** Dinámicas de acumulación de capital y desvalorización salarial que restringen el ingreso real [@DuranSilva2022; @DuranKremerman2024].
 
-* **Estructura del gasto, tiempo y pobreza:** Presión del presupuesto en bienes esenciales, pobreza de tiempo femenina y actualización de la medición de pobreza [@barrigaMujeresPobrezaTiempo2025; @InformeFinalRecomendaciones2025; @InformePrincipalesResultados2024].
+* **Estructura del gasto, tiempo y pobreza:** Presión del presupuesto en bienes esenciales, pobreza de tiempo femenina y actualización de la medición de pobreza [@barrigaMujeresPobrezaTiempo2025; @InformeFinalRecomendaciones2025; @InformeEPF2024].
 
 * **Desigualdad estructural y bienestar:** Trampas de baja movilidad social y tensiones emergentes en el bienestar socioeconómico [@cepalPanoramaSocialAmerica2025; @ResumenResultadosCASEN2023; @TensoresBienestarSocial2024].
 
-## Contexto: Algunos datos clave sobre Chile {.smaller}
+## Contexto y fuentes {.smaller}
 
-Durante el decenio **2015–2025**, Chile ha experimentado transformaciones sociodemográficas y económicas decisivas:
+El proyecto combina encuestas de hogares y estadísticas de costo de vida producidas bajo marcos nacionales distintos:
 
-* **Ingresos deprimidos:** Una proporción sustancial de la fuerza laboral percibe ingresos insuficientes para cubrir el costo de vida real del hogar [@durans.VerdaderosSueldosChile2024].
-* **Estructura del gasto familiar:** El presupuesto de los hogares de menores ingresos se destina prioritariamente a alimentos, vivienda y servicios básicos [@InformePrincipalesResultados2024].
-* **Tensiones en el bienestar:** Se observan brechas de género en el uso del tiempo e insatisfacción subjetiva sobre las condiciones materiales de vida [@barrigaMujeresPobrezaTiempo2025; @TensoresBienestarSocial2024].
+* **Chile:** CASEN mide ingresos y condiciones sociales; la EPF describe gastos de los hogares y no debe presentarse por sí sola como una canasta normativa.
+* **Brasil:** PNAD Contínua permite estudiar ingresos y características de las personas y hogares.
+* **Argentina:** EPH releva ingresos laborales y familiares en aglomerados urbanos.
+
+La comparabilidad exige documentar período, población de referencia, área cubierta, ponderadores y definición de ingreso para cada indicador [@cepalPanoramaSocialAmerica2025].
 
 ## Problema de investigación {.smaller}
 
@@ -83,10 +89,10 @@ Durante el decenio **2015–2025**, Chile ha experimentado transformaciones soci
 ::: {.column width="50%"}
 ### 1. Dimensión Empírica y Social
 
-* **Presión sobre el bienestar cotidiano:** Persisten severas tensiones socioeconómicas y pobreza de tiempo en la reproducción de los hogares 
+* **Presión sobre el bienestar cotidiano:** La suficiencia del ingreso depende de la distribución social del gasto esencial y del acceso a bienes y servicios
   * [@barrigaMujeresPobrezaTiempo2025; @TensoresBienestarSocial2024].
 
-* **Trampa regional (2015–2025):** Un decenio caracterizado por bajo crecimiento, inflación y baja movilidad social que agudiza las brechas en Chile 
+* **Comparación regional:** Los hogares enfrentan contextos de precios, empleo y protección social diferentes en los tres países
   * [@cepalPanoramaSocialAmerica2025; @ResumenResultadosCASEN2023].
 :::
 
@@ -94,90 +100,76 @@ Durante el decenio **2015–2025**, Chile ha experimentado transformaciones soci
 ### 2. Dimensión Teórico-Metodológica
 
 * **Análisis fragmentado:** La literatura suele separar *ingreso* y *gasto*, ignorando la dinámica de acumulación de capital y valor del trabajo 
-  * [@durans.ChileanEconomyAnalysis2022].
+  * [@DuranSilva2022].
 
-* **Opacidad del poder adquisitivo:** Instrumentos como CASEN y ESI miden ingresos monetarios, pero no el costo real de la vida ni su distribución 
-  * [@durans.VerdaderosSueldosChile2024; @InformePrincipalesResultados2024; @InformeFinalRecomendaciones2025].
+* **Desafío de medición:** Las encuestas de hogares y las canastas oficiales miden conceptos distintos y no siempre comparten período o cobertura territorial
+  * [@DuranKremerman2024; @InformeEPF2024; @InformeFinalRecomendaciones2025].
 :::
 
 ::::
 
 ## Preguntas de investigación
 
-**Pregunta general del proyecto:**
-¿Cómo se distribuye el poder adquisitivo en Chile, Brasil y Argentina durante el decenio 2015-2025?
-<hr>
-**Pregunta específica (Fase 1 - Presentación actual):**
-¿Cuáles son las determinantes estructurales de los ingresos en **Chile** (CASEN 2024) y cómo estas diferencias salariales nos dan indicios sobre las brechas de poder adquisitivo?
+**Pregunta general:**
+¿Cómo se relacionan los ingresos de los hogares con el costo de una canasta básica de referencia en Chile, Brasil y Argentina, según los microdatos y períodos disponibles para cada país?
+
+**Preguntas específicas:**
+
+- ¿Qué medidas de ingreso y costo de canasta son compatibles dentro de cada país?
+- ¿Qué hogares presentan menor capacidad de cobertura, según sus características sociales?
+- ¿Qué diferencias metodológicas limitan la comparación entre países?
 
 ## Objetivo General
-**Proyecto completo:** Analizar la relación entre la evolución de los ingresos de los hogares y el costo de vida en Chile, Brasil y Argentina (2015-2025), evaluando las variaciones en el poder adquisitivo.
-<br>
-**Fase 1 (Alcance de esta presentación):** Explorar y modelar la distribución de los ingresos laborales en Chile mediante CASEN 2024, identificando brechas sociodemográficas que afecten el poder adquisitivo.
+Comparar descriptivamente la capacidad de los hogares de Chile, Brasil y Argentina para cubrir el costo de una canasta básica local con sus ingresos monetarios, distinguiendo las fuentes, períodos y límites de comparabilidad.
 
 ## Objetivos Específicos {.smaller}
 
 ::::{.columns}
 :::{.column width="50%"}
-**Para la Fase 1 (Caso Chile - Hoy):**
-
-- Procesar y estandarizar los microdatos de la encuesta CASEN 2024.
-- Analizar estadísticamente la distribución de ingresos laborales y pobreza monetaria.
-- Modelar las determinantes del salario (sexo, edad, educación, etc.) para identificar brechas iniciales.
-:::
-
-:::{.column width="50%"}
-**Para las siguientes fases (Estudio Comparativo Tesis):**
-
-- Incorporar y homologar datos de Brasil (PNAD Contínua) y Argentina (EPH).
-- Calcular y cruzar indicadores de costo de vida (IPC y Canasta Básica).
-- Comparar la variación del poder adquisitivo real entre las tres economías.
+- **Armonizar con cautela** ingresos, ponderadores y características sociales de CASEN, PNAD Contínua y EPH.
+- **Reunir valores documentados** de las canastas y referencias de cada país, distinguiendo fuente gubernamental e independiente.
+- **Estimar cobertura** del costo local por el ingreso del hogar solo cuando las medidas sean compatibles.
+- **Describir brechas sociales** dentro de cada encuesta y explicar qué comparaciones no son válidas.
 :::
 ::::
 
 ## Hipótesis de Investigación {.smaller}
 
-Para evaluar la distribución de los ingresos laborales ($y_1$) en CASEN 2024, planteamos las siguientes hipótesis:
-
-* **$H_1$ (Brecha Salarial por Sexo):**
-  * **$H_{1a}$ (Brecha Bruta):** Existen diferencias estadísticamente significativas en el salario promedio (`salario`) entre hombres y mujeres.
-  * **$H_{1b}$ (Brecha Ajustada):** Controlando por capital humano y estructura del hogar, persiste una penalización salarial hacia las mujeres en el logaritmo del salario (`log_salario`).
-
-* **$H_2$ (Rendimientos del Capital Humano):**
-  * Mayores niveles educacionales y la experiencia potencial (`edad` y `edad^2`) incrementan de forma positiva y no lineal el ingreso laboral individual.
-
-* **$H_0$ (Hipótesis Nula):**
-  * No existen diferencias estadísticamente significativas en los ingresos por trabajo según sexo ni rendimiento significativo de las variables de capital humano.
+La hipótesis de trabajo es que los hogares ubicados en la parte baja de la distribución del ingreso presentan menor capacidad de cubrir el costo de su canasta local. Las estimaciones se evaluarán dentro de cada encuesta, respetando su diseño muestral. No se postula una prueba estadística directa de diferencias entre las tres muestras no simultáneas.
 
 ## Estrategia Metodológica: Fuentes de Datos {.smaller}
 
-Para operacionalizar la relación entre **Ingreso** y **Costo de Vida**, combinamos dos fuentes oficiales de microdatos:
+La estrategia combina microdatos de encuestas oficiales con valores de canastas locales:
 
-::::{.columns}
-:::{.column width="50%"}
-**1. Caracterización e Ingresos:**
-* **Fuente:** CASEN 2024 (MDSF).
-* **Muestra:** Microdatos de hogares a nivel nacional.
-* **Aporte:** Captura la estructura sociodemográfica, `ytotcorh` (ingreso total del hogar) y `salario` ($y_1$).
-:::
+| País | Encuesta y período disponible | Medida de costo de vida |
+|:--|:--|:--|
+| Chile | CASEN 2024; IX EPF 2021–2022 | La CBA mensual oficial se publica por persona; verificar período y método. La EPF mide gasto observado. |
+| Brasil | PNAD Contínua 2025 (visita 1; armonización inicial); primer trimestre de 2026 (pendiente de diccionario propio) | DIEESE publica cesta alimentaria por capital (fuente independiente); hacer coincidir ciudades con la encuesta. El IPCA de IBGE es un índice de precios, no un costo de canasta. |
+| Argentina | EPH, primer trimestre de 2026 | INDEC publica CBA/CBT por adulto equivalente para Gran Buenos Aires; limitar la comparación a geografía compatible. |
 
-:::{.column width="50%"}
-**2. Costo de Vida y Gastos:**
-* **Fuente:** IX EPF 2021-2022 (INE).
-* **Muestra:** Microdatos de la `Base Gastos` y `Base Personas`.
-* **Aporte:** Define la estructura de consumo, ponderadores del IPC y el costo de la Canasta Básica (CBA/CBT).
-:::
-::::
+Los microdatos de trabajo se mantienen localmente y no se publican en Git. Los valores nominales se analizan dentro de cada moneda nacional; no se convierten a una moneda común como sustituto de una medida de precios.
+
+## Indicador de comparación
+
+Cuando la fuente y la cobertura coincidan, se calculará:
+
+$$
+\text{Razón de cobertura} =
+\frac{\text{ingreso monetario mensual per cápita del hogar}}
+{\text{costo mensual per cápita de la canasta local}}
+$$
+
+Una razón de 1 equivale al costo de una canasta local bajo su definición oficial. No significa que las canastas o los niveles de bienestar sean equivalentes entre países.
 
 ## Operacionalización del Costo de Vida (IX EPF) {.smaller}
 
-La **IX Encuesta de Presupuestos Familiares (INE)** nos permite calibrar la presión del costo de vida sobre los ingresos mediante tres dimensiones:
+La **IX Encuesta de Presupuestos Familiares (INE)** describe gastos observados durante su período de referencia. Sus datos no equivalen a una canasta normativa y corresponden a un período distinto de CASEN 2024.
 
-* **Estructura del Gasto del Hogar (`Base Gastos`):** Permite identificar qué proporción del ingreso destinan los diferentes quintiles a bienes de primera necesidad (alimentos, vivienda, transporte).
-* **Canasta Básica de Alimentos (CBA) y Canasta Total (CBT):** Establece el valor monetario mínimo requerido para satisfacer necesidades biológicas y de consumo.
-* **Sensibilidad a la Inflación:** Permite evaluar cómo el aumento en el precio de la canasta impacta en el poder adquisitivo real según el nivel socioeconómico.
+* **Base Gastos:** registra montos de productos clasificados en la división de alimentos.
+* **Base Personas:** caracteriza a integrantes de los hogares encuestados.
+* **Uso en este estudio:** contexto descriptivo del gasto; no se interpreta como precio de CBA/CBT ni se cruza con salarios de otro período para estimar cobertura.
 
-## Costo de la Canasta Básica Alimentaria (EPF)
+## Gasto alimentario observado en la EPF {.smaller}
 
 ```{r}
 #| echo: false
@@ -190,17 +182,17 @@ library(haven)
 library(knitr)
 
 # 1. Cargar bases de datos
-epf_gastos <- read_dta("../data/raw/base-gastos-ix-epf-stata.dta")
-epf_personas <- read_dta("../data/raw/base-personas-ix-epf-stata.dta")
+epf_gastos <- read_dta("../data/raw/chile/base-gastos-ix-epf-stata.dta")
+epf_personas <- read_dta("../data/raw/chile/base-personas-ix-epf-stata.dta")
 
 # 2. Filtrar y limpiar folios vacíos o inválidos
-cba_hogares <- epf_gastos %>%
+gasto_alimentario_hogares <- epf_gastos %>%
   filter(!is.na(folio) & folio != "") %>%
   select(folio, fe, ccif, gasto) %>%
   filter(grepl("^01", ccif)) %>%
   group_by(folio) %>%
   summarise(
-    gasto_alimentos_cba = sum(gasto, na.rm = TRUE),
+    gasto_alimentario = sum(gasto, na.rm = TRUE),
     fe = max(fe, na.rm = TRUE),
     .groups = "drop"
   )
@@ -211,23 +203,23 @@ tamano_hogar <- epf_personas %>%
   summarise(tot_per_h = n(), .groups = "drop")
 
 # 3. Unir y calcular per cápita
-cba_final <- cba_hogares %>%
+gasto_alimentario_epf <- gasto_alimentario_hogares %>%
   inner_join(tamano_hogar, by = "folio") %>%
-  mutate(gasto_alimentos_pc = gasto_alimentos_cba / tot_per_h)
+  mutate(gasto_alimentario_pc = gasto_alimentario / tot_per_h)
 
-# 4. Presentar tabla de resumen para la diapositiva (Ponderada por factor de expansión 'fe')
-cba_final %>%
+# Resumen descriptivo ponderado del gasto observado
+gasto_alimentario_epf %>%
   summarise(
-    `Gasto Promedio Hogar` = weighted.mean(gasto_alimentos_cba, w = fe, na.rm = TRUE),
-    `Gasto Mediano Hogar`  = median(gasto_alimentos_cba, na.rm = TRUE),
-    `Gasto Promedio Per Cápita` = weighted.mean(gasto_alimentos_pc, w = fe, na.rm = TRUE),
-    `Gasto Mediano Per Cápita`  = median(gasto_alimentos_pc, na.rm = TRUE)
+    `Gasto alimentario promedio del hogar` = weighted.mean(gasto_alimentario, w = fe, na.rm = TRUE),
+    `Gasto alimentario mediano del hogar`  = median(gasto_alimentario, na.rm = TRUE),
+    `Gasto alimentario promedio per cápita` = weighted.mean(gasto_alimentario_pc, w = fe, na.rm = TRUE),
+    `Gasto alimentario mediano per cápita`  = median(gasto_alimentario_pc, na.rm = TRUE)
   ) %>%
-  pivot_longer(everything(), names_to = "Indicador (CBA - EPF)", values_to = "Monto ($)") %>%
+  pivot_longer(everything(), names_to = "Indicador de gasto EPF", values_to = "Monto") %>%
   kable(digits = 0, format.args = list(big.mark = "."))
 ```
 
-## Resultados preliminares
+## Análisis exploratorio: Chile (CASEN 2024)
 
 ```{r setup, include=FALSE}
 library(tidyverse)
@@ -236,8 +228,14 @@ library(knitr)
 library(survey)
 library(srvyr)
 
-# Cargar la base de datos
-casen2024 <- readRDS("../data/processed/casen2024_raw.rds")
+# Cargar solo las variables requeridas desde el microdato original
+casen2024 <- haven::read_dta(
+  "../data/raw/chile/casen_2024.dta",
+  col_select = tidyselect::all_of(c(
+    "tot_per_h", "edad", "e6a", "sexo", "y1", "pobreza",
+    "ytotcorh", "expr", "varstrat", "varunit"
+  ))
+)
 
 # Selección de variables y transformación (solo variables utilizadas)
 proc_casen <- casen2024 %>%
@@ -438,13 +436,7 @@ tidy(prueba_t_svy) %>%
 
 ::: {style="font-size: 0.65em; line-height: 1.3;"}
 
-Interpretación de Resultados:
-
-Rechazo de $H_0$: La diferencia de ingresos promedio entre hombres y mujeres es estadísticamente significativa ($p < 0.001$).
-
-Evidencia para $H_{1a}$: Confirma la existencia de una brecha salarial bruta en la población ocupada.
-
-Limitación: Al ser un análisis bivariado, no controla por educación, edad u horas trabajadas (lo que se evalúa en el modelo multivariado).
+La tabla muestra una comparación bivariada dentro de CASEN 2024. Interprete su estimación y valor p después de ejecutar el análisis; no representa una diferencia entre países ni controla por otras características.
 
 :::
 
@@ -542,69 +534,35 @@ Categóricas: $\% \Delta Y = (\exp(\beta) - 1) \times 100$.
 
 ::::
 
-## 7a. Articulación: Indicadores de Cobertura y Brecha (CASEN - EPF) {.smaller}
+## Comparación de cobertura: disponibilidad actual {.smaller}
 
-Cruce del costo de la **Canasta Básica Alimentaria (EPF)** con los ingresos laborales y la estructura del hogar **(CASEN 2024)**:
+El indicador requiere un ingreso mensual y un costo mensual de canasta que compartan período, unidad y cobertura territorial. La EPF chilena mide gasto observado y no se usa como sustituto de una canasta oficial.
 
-<br>
+| País | Microdatos locales | Insumo de canasta pendiente |
+|:--|:--|:--|
+| Chile | CASEN 2024; EPF 2021–2022 | CBA oficial mensual por persona; verificar período y método. |
+| Brasil | PNAD Contínua 2025 y primer trimestre de 2026 | Cesta DIEESE independiente por capital; emparejar geografía y período. |
+| Argentina | EPH, primer trimestre de 2026 | CBA/CBT INDEC para Gran Buenos Aires, por adulto equivalente. |
 
-```{r}
-#| echo: false
-#| eval: true
-#| warning: false
+No se presentan tasas de cobertura calculadas hasta documentar y validar estos insumos para cada caso.
 
-# PASO 1: Extraer la Canasta Básica Alimentaria (CBA) per cápita desde la EPF
-cba_pc_epf <- weighted.mean(cba_final$gasto_alimentos_pc, w = cba_final$fe, na.rm = TRUE)
+## Interpretación comparativa
 
-# PASO 2: Procesar la base CASEN con el diseño muestral complejo
-diseno_casen %>%
-  filter(!is.na(salario) & salario > 0) %>%
-  mutate(
-    # Umbral de CBA requerido según integrantes del hogar del trabajador
-    cba_hogar_trabajador = tot_per_h * cba_pc_epf,
-    # Dummy: 1 si el salario no cubre la CBA de su hogar
-    no_cubre_cba = if_else(salario < cba_hogar_trabajador, 1, 0)
-  ) %>%
-  
-  # PASO 3: Inferencia poblacional
-  summarise(
-    `CBA Per Cápita (EPF)` = cba_pc_epf,
-    `CBA Hogar Promedio (4 personas)` = cba_pc_epf * 4,
-    `Salario Mediano (CASEN)` = survey_median(salario, na.rm = TRUE, vartype = NULL),
-    `Ocupados sin Cobertura CBA Familiar (%)` = survey_mean(no_cubre_cba, na.rm = TRUE, vartype = NULL) * 100
-  ) %>%
-  
-  # PASO 4: Formatear tabla
-  pivot_longer(everything(), names_to = "Indicador de Brecha", values_to = "Valor") %>%
-  mutate(
-    `Estimación Poblacional` = if_else(
-      grepl("%", `Indicador de Brecha`),
-      paste0(format(round(Valor, 1), nsmall = 1), " %"),
-      paste0("$ ", format(round(Valor, 0), big.mark = ".", decimal.mark = ","))
-    )
-  ) %>%
-  select(`Indicador de Brecha`, `Estimación Poblacional`) %>%
-  kable()
-```
+* La capacidad de cobertura se estimará dentro de cada país y con sus propias definiciones oficiales.
+* Las diferencias de período, cobertura geográfica, ingreso y composición de canastas limitan la comparación directa.
+* Las encuestas permiten describir asociaciones y brechas; no identifican por sí mismas efectos causales de inflación o políticas sociales.
 
-## 7b. Articulación: Implicancias sobre el Poder Adquisitivo {.smaller}
+## Trabajo pendiente
 
-* **Presión sobre el Ingreso Individual:** La Canasta Básica Alimentaria para un hogar promedio (4 personas) exige una proporción sustancial del salario mediano individual.
-* **Insuficiencia del Salario Laboral:** Una fracción importante de la población ocupada percibe un salario individual insuficiente para cubrir la CBA de su grupo familiar.
-
-## Próximos pasos de la investigación
-
-Una vez validada la metodología con el caso chileno (Fase 1), la investigación avanzará hacia el estudio comparativo regional integrando:
-
-* **Brasil:** Incorporación de microdatos de la PNAD Contínua.
-* **Argentina:** Incorporación de microdatos de la EPH.
-* **Costo de vida:** Construcción del índice de poder adquisitivo real cruzando salarios con inflación/canasta básica en los tres países.
+1. Estimar y revisar descriptivos ponderados con el diseño muestral de cada encuesta; integrar PNAD 1T2026 solo con su documentación específica.
+2. Incorporar series oficiales de canastas para los territorios y períodos analizados.
+3. Ejecutar y revisar los indicadores ponderados antes de incluir conclusiones comparativas.
 
 ## ¡Gracias! por su atención...
 
 Más información:
 
-* **GitHub:** [vicenterojasmurua/ingresos-costo-vida-chile](https://github.com/vicenterojasmurua/ingresos-costo-vida-chile)
+* **GitHub:** [vicenterojasmurua/ingresos-costo-vida-latinoamerica](https://github.com/vicenterojasmurua/ingresos-costo-vida-latinoamerica)
 * **LinkedIn:** [in/vicente-rojas-murua](https://www.linkedin.com/in/vicente-rojas-murua)
 * **E-mail:** [vicente.rojas.murua@ug.uchile.cl](mailto:vicente.rojas.murua@ug.uchile.cl) / [vrojasmurua@gmail.com](mailto:vrojasmurua@gmail.com)
 

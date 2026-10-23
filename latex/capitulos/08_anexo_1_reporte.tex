@@ -1,6 +1,6 @@
 \section{Anexo 1: Reporte de Estrategia Híbrida de Revisión Bibliográfica}
 
-Para garantizar un marco de antecedentes transparente, exhaustivo y replicable, la selección de la literatura especializada se llevó a cabo mediante una estrategia híbrida basada en la metodología PRISMA 2020. Esta combinó minería de datos bibliográficos en bases científicas de alto impacto con la incorporación sistemática de literatura gris institucional y búsquedas complementarias en repositorios iberoamericanos.
+Se diseñó un protocolo de búsqueda inspirado en PRISMA 2020 para organizar la revisión bibliográfica. El flujo reproducible disponible actualmente procesa los registros exportados de Web of Science (WoS); las búsquedas complementarias y la incorporación de literatura gris descritas en este anexo son componentes previstos, no fuentes con recuentos incluidos en el diagrama.
 
 \subsection{Justificación de la Búsqueda y Cadenas de Consulta}
 La elección de \textit{Web of Science Core Collection} responde a la necesidad de evaluar la producción académica sometida a rigurosa revisión por pares sobre el bienestar socioeconómico en la región. La consulta fue estructurada en el campo de tema (\textit{Topic}) para vincular las métricas de ingresos y precios con la cobertura geográfica del estudio:
@@ -10,8 +10,8 @@ La elección de \textit{Web of Science Core Collection} responde a la necesidad 
 TS=((("cost of living" OR "purchasing power" OR "household income*" OR "real wage*" OR "minimum wage*" OR "basic food basket*" OR "basic basket*" OR "inflation*" OR "cash transfer*" OR "social transfer*" OR "income distribution" OR "income inequality" OR "informal labor" OR "labor informality") AND ("Chile" OR "Brazil" OR "Brasil" OR "Argentina" OR "Southern Cone" OR "Cono Sur")))
 \end{quote}
 
-\subsubsection{Búsqueda Complementaria Regional (SciELO, Redalyc, Dialnet y Google Académico)}
-Para mitigar el sesgo de indexación internacional y capturar discusiones empíricas regionales editadas en español y portugués, se ejecutaron cadenas de búsqueda adaptadas en plataformas de acceso abierto:
+\subsubsection{Búsqueda Complementaria Regional Prevista (SciELO, Redalyc, Dialnet y Google Académico)}
+Para mitigar el sesgo de indexación internacional y capturar discusiones empíricas regionales en español y portugués, se proponen las siguientes cadenas adaptables. Sus resultados deberán registrarse por fuente y fecha antes de incorporarlos a la selección:
 
 \begin{itemize}
     \item \textbf{SciELO / Redalyc (Español)}:
@@ -41,13 +41,13 @@ Para mitigar el sesgo de indexación internacional y capturar discusiones empír
 \end{itemize}
 
 \subsection{Criterios de Selección, Inclusión y Exclusión}
-Para la conformación cualitativa del corpus definitivo se establecieron parámetros explícitos de elegibilidad:
+Para la revisión manual pendiente se proponen los siguientes criterios de elegibilidad, que deberán aplicarse y documentarse antes de informar el corpus definitivo:
 
 \begin{itemize}
     \item \textbf{Criterios de Inclusión}:
     \begin{enumerate}
         \item \textit{Cobertura Geográfica}: Investigaciones enfocadas empíricamente en Chile, Brasil o Argentina, o análisis comparativos del Cono Sur.
-        \item \textit{Delimitación Temporal}: Publicaciones enmarcadas en cualquier periodo de tiempo disponible en WoS.
+        \item \textit{Delimitación Temporal}: Sin límite temporal en la búsqueda; la pertinencia de estudios históricos se evaluará según su aporte al problema.
         \item \textit{Sustento Empírico e Instrumentos}: Trabajos que empleen o discutan microdatos de encuestas oficiales de hogares (\textit{CASEN}, \textit{PNAD Contínua}, \textit{EPH}) o indicadores oficiales de precios e ingresos (\textit{IPC}, \textit{CBA}, \textit{CBT}, \textit{PPA}).
         \item \textit{Pertinencia Temática}: Estudios centrados en la erosión del poder adquisitivo, dinámicas del salario real/mínimo, heterogeneidad por quintiles y el impacto atenuante de transferencias estatales o informales.
     \end{enumerate}
@@ -56,7 +56,7 @@ Para la conformación cualitativa del corpus definitivo se establecieron paráme
     \begin{enumerate}
         \item \textit{Desenfoque Geográfico}: Investigaciones centradas en otras latitudes regionales sin datos desagregados para los países objeto de estudio.
         \item \textit{Ausencia de Análisis Empírico Monetario}: Ensayos puramente teóricos o reflexiones cualitativas que no procesen datos monetarios, de precios o de consumo.
-        \item \textit{Desfase Temporal}: Publicaciones anteriores a 2015 desvinculadas de los ciclos macroeconómicos analizados.
+        \item \textit{Desfase Temporal}: Estudios sin conexión sustantiva con el problema, independientemente del año de publicación.
     \end{enumerate}
 \end{itemize}
 
@@ -68,8 +68,8 @@ La captura bibliográfica en repositorios científicos internacionales presenta 
     \item \textbf{Enfoque de Microdatos}: La producción indexada suele enfocarse en modelos teóricos o macroeconómicos agregados, conteniendo poca documentación técnica sobre la armonización operativa de encuestas de hogares.
 \end{enumerate}
 
-\subsection{Necesidad y Criterios de Integración de Literatura Gris Institucional}
-Para superar estas restricciones y asegurar la validez empírica de la investigación, se integró de forma sistemática literatura gris procedente de organismos multilaterales (CEPAL) e institutos nacionales de estadística (INDEC, IBGE, INE y MIDES).
+\subsection{Integración Prevista de Literatura Gris Institucional}
+Para superar estas restricciones y asegurar la validez empírica de la investigación, se prevé integrar documentación de organismos multilaterales (CEPAL) e institutos nacionales de estadística (INDEC, IBGE, INE y MIDES). Esta documentación aún no forma parte del recuento del diagrama PRISMA.
 
 La inclusión de esta literatura gris se fundamenta en tres razones indispensables:
 \begin{itemize}
@@ -80,22 +80,22 @@ La inclusión de esta literatura gris se fundamenta en tres razones indispensabl
 
 \subsection{Procesamiento Algorítmico y Filtrado}
 \label{sec:procesamiento_algoritmico_filtrado}
-Los metadatos obtenidos se procesaron mediante lenguaje R y el paquete \texttt{bibliometrix}. El algoritmo de depuración aplicó las siguientes reglas operativas:
+Los lotes disponibles de WoS se procesaron en R mediante \texttt{bibliometrix}. El flujo actual aplica estas reglas:
 
 \begin{enumerate}
     \item \textbf{Deduplicación}: Detección y eliminación de registros duplicados por coincidencia de títulos completos.
     \item \textbf{Cribado Temático Algorítmico}: Filtrado de resúmenes mediante patrones de expresiones regulares (\texttt{grep}), priorizando trabajos que emplearan fuentes primarias de encuestas de hogares (\textit{CASEN}, \textit{PNAD}, \textit{EPH}) y variables clave como canasta básica, PPA, inflación o ingresos.
-    \item \textbf{Elegibilidad y Curaduría Cualitativa en Zotero}: Importación del corpus cribado al gestor bibliográfico \textit{Zotero}. Organización de las referencias mediante un sistema de etiquetas temáticas (\textit{tags}) vinculadas a los cinco ejes analíticos y posterior filtrado fino a texto completo, aislando los artículos en una subcarpeta final de inclusión.
-    \item \textbf{Sistematización Institucional}: Incorporación estructurada de boletines técnicos, metodologías y reportes estadísticos de CEPAL, INDEC, IBGE y MIDES/INE.
+    \item \textbf{Elegibilidad y revisión manual}: Pendiente de realizar y documentar; no se infiere a partir de la disponibilidad de DOI.
+    \item \textbf{Sistematización institucional}: Incorporación de boletines técnicos, metodologías y reportes de CEPAL, INDEC, IBGE y MIDES/INE prevista como fuente complementaria, aún sin recuento en este flujo.
 \end{enumerate}
 
-La ejecución de este protocolo algorítmico sobre los datos brutos extraídos identificó un total inicial de 3.982 registros. Tras la remoción de 18 elementos duplicados inter-lotes, se sometieron a evaluación automatizada 3.964 artículos. La aplicación del filtro de expresiones regulares excluyó 218 registros no pertinentes a las variables de interés, consolidando un corpus cribado de 3.746 publicaciones. De este total, 3.345 artículos contaban con identificador DOI para su localización. Tras importar estas referencias a Zotero y ejecutar la curaduría manual cualitativa mediante la subcarpeta de selección final y el etiquetado por ejes, se excluyeron 3.241 publicaciones que no abordaban directamente la relación ingreso-costo de vida en el Cono Sur, estableciendo un corpus definitivo de 104 estudios incluidos en la síntesis bibliográfica.
+El procesamiento identificó 3.982 registros brutos de WoS. Se eliminaron 18 duplicados entre lotes y se filtraron automáticamente 3.964 registros por título y resumen: 214 fueron excluidos por los patrones temáticos y 3.750 quedaron retenidos para revisión manual. De estos, 3.348 tienen DOI registrado; este dato facilita la localización, pero no acredita disponibilidad de texto completo ni elegibilidad. La revisión manual, las exclusiones a texto completo y el número definitivo de estudios incluidos están pendientes de verificación. Por tanto, este diagrama informa solo las etapas automatizadas y no representa todavía una revisión PRISMA completa.
 
 El flujo cuantitativo detallado del proceso de identificación, screening e inclusión final de la literatura se resume en la Figura~\ref{fig:prisma-flowchart}.
 
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{../images/prisma-flowchart.pdf}
-    \caption{Diagrama de Flujo Metodológico PRISMA 2020 para la selección de bibliografía de WoS.}
+    \caption{Flujo preliminar de registros de WoS. Las cifras corresponden al procesamiento automatizado; la revisión manual y la inclusión final están pendientes.}
     \label{fig:prisma-flowchart}
 \end{figure}

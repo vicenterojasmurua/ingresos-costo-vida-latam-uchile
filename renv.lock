@@ -1,7 +1,12 @@
 {
-  "R": "4.3.0",
-  "Repos": {
-    "CRAN": "https://cloud.r-project.org"
+  "R": {
+    "Version": "4.3.0",
+    "Repositories": [
+      {
+        "Name": "CRAN",
+        "URL": "https://cloud.r-project.org"
+      }
+    ]
   },
   "Packages": {
     "tidyverse": {
@@ -10,9 +15,57 @@
       "Source": "Repository",
       "Repository": "CRAN"
     },
+    "dplyr": {
+      "Package": "dplyr",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
     "readxl": {
       "Package": "readxl",
       "Version": "1.4.3",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "haven": {
+      "Package": "haven",
+      "Version": "2.5.5",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "readr": {
+      "Package": "readr",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "tidyselect": {
+      "Package": "tidyselect",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "bibliometrix": {
+      "Package": "bibliometrix",
+      "Version": "5.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "DiagrammeR": {
+      "Package": "DiagrammeR",
+      "Version": "1.0.12",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "DiagrammeRsvg": {
+      "Package": "DiagrammeRsvg",
+      "Version": "0.1",
+      "Source": "Repository",
+      "Repository": "CRAN"
+    },
+    "rsvg": {
+      "Package": "rsvg",
+      "Version": "2.7.0",
       "Source": "Repository",
       "Repository": "CRAN"
     },

@@ -1,6 +1,6 @@
 # ===========================================
 # Configuración del entorno R
-# Proyecto: ingresos-costo-vida-chile
+# Proyecto: ingresos-costo-vida-latinoamerica
 # ===========================================
 
 if (interactive()) {
@@ -33,8 +33,8 @@ if (interactive()) {
   # MENSAJE DE BIENVENIDA
   cat("\n")
   cat("╔════════════════════════════════════════════════════════════╗\n")
-  cat("║   Análisis de Ingresos y Costo de Vida en Chile           ║\n")
-  cat("║   Proyecto: ingresos-costo-vida-chile                     ║\n")
+  cat("║   Ingresos y Costo de Vida en el Cono Sur                ║\n")
+  cat("║   Chile, Brasil y Argentina                               ║\n")
   cat("╚════════════════════════════════════════════════════════════╝\n")
   cat("\n")
 

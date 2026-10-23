@@ -32,6 +32,8 @@ data/processed/*
 *.sav
 *.csv
 *.xlsx
+!data/metadata/
+!data/metadata/*.csv
 
 # ==========================================
 # OUTPUT FILES (Permitir sincronización con Overleaf)
@@ -47,6 +49,20 @@ output/*.csv
 !output/**/*.tex
 !output/**/*.pdf
 !output/**/*.png
+
+# ==========================================
+# GENERATED BUILD FILES AND LOGS
+# ==========================================
+/main.log
+/proc_rojas_murua_vicente.log
+/logs/*.log
+/latex/*.aux
+/latex/*.bbl
+/latex/*.bcf
+/latex/*.blg
+/latex/*.log
+/latex/*.run.xml
+/latex/*.synctex.gz
 
 # ==========================================
 # STATA & OS SPECIFIC

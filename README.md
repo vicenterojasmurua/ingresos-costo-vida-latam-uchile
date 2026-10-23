@@ -1,96 +1,110 @@
-# Análisis de Ingresos y Costo de Vida en Chile, Brasil y Argentina 📊
+# Ingresos y costo de vida en América del Sur
 
-![Stata version](https://img.shields.io/badge/Stata-17.0+-blue)
-![R version](https://img.shields.io/badge/R-4.3.0+-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Overleaf Sync](https://img.shields.io/badge/Overleaf-Compatible-brightgreen)
+Estudio comparativo de la relación entre los ingresos de los hogares y el costo de una canasta básica en **Chile, Brasil y Argentina**. El repositorio reúne la tesis, los scripts de análisis, la revisión bibliográfica y la presentación del seminario.
 
-## Descripción
+## Alcance y datos disponibles
 
-Este proyecto analiza la relación entre ingresos y costo de vida en Chile mediante el procesamiento de microdatos de la encuesta CASEN 2024, EPH (Argentina) y PNAD (Brasil). El flujo de trabajo está diseñado bajo estándares estrictos de **Open Science**, garantizando replicabilidad determinista y conexión automatizada con LaTeX (Overleaf).
+El diseño compara encuestas oficiales de hogares con medidas de costo de vida documentadas para cada país. Los períodos disponibles en este equipo no coinciden: CASEN 2024 e IX EPF 2021–2022 para Chile; PNAD Contínua 2025 y el primer trimestre de 2026 para Brasil; y EPH del primer trimestre de 2026 para Argentina. Por ello, los resultados deben presentarse como **cortes por país y período**, no como una serie temporal común ni como una comparación simultánea.
 
-## 📁 Estructura del Proyecto
+La carpeta local incluye microdatos y documentación descargados de CASEN, EPF, PNAD Contínua y EPH. **Los archivos de microdatos no se versionan en Git**; consulte [docs/DATOS.md](docs/DATOS.md) para el inventario, los requisitos y las brechas pendientes.
+
+## Estructura
 
 ```text
-ingresos-costo-vida-chile/
-├── data/
-│   ├── raw/              # Microdatos crudos (CASEN, EPH, PNAD)
-│   └── processed/        # Microdatos limpios y armonizados
-├── scripts/
-│   ├── stata/            # Do-files de Stata 17 (Procesamiento y Modelos)
-│   └── r/                # Scripts auxiliares en R
-├── output/               # Salidas vinculadas a Overleaf
-│   ├── tables/           # Tablas estadísticas en código LaTeX (.tex)
-│   └── figures/          # Gráficos vectoriales (.pdf)
-├── logs/                 # Registros de ejecución para auditoría
-├── .gitignore            # Exclusión de datos pesados
-└── README.md             # Instrucciones de replicación
+data/
+  raw/                 Microdatos originales, organizados por país (locales/ignorados por Git)
+  processed/           Bases procesadas regenerables (locales/ignoradas por Git)
+scripts/
+  00_lit_review/       Deduplicación, cribado bibliográfico y diagrama PRISMA
+  01_data_analysis/    Análisis de encuestas en R y Stata
+presentaciones/        Fuente Quarto y presentación HTML renderizada
+latex/                 Tesis en LaTeX, capítulos y PDF
+refs/                  Bibliografía BibTeX y estilo APA
+images/                Logo y figuras incluidas en la tesis
+output/                Tablas y figuras analíticas generadas
+docs/                  Alcance, datos, instalación y contribución
 ```
 
-## 🚀 Inicio Rápido
+## Requisitos
 
-### Requisitos Previos
-- **R**: versión 4.3.0 o superior
-- **RStudio** (opcional pero recomendado)
-- **Git**: para control de versiones
+- R 4.3 o posterior y los paquetes declarados en `renv.lock`.
+- Stata 17 para ejecutar el do-file de CASEN.
+- Quarto para renderizar la presentación.
+- Una distribución de LaTeX con `latexmk`, Biber y los paquetes usados por la tesis.
 
-### Instalación
+## Preparación
 
-1. Clonar el repositorio:
-```bash
-git clone <repository-url>
-cd ingresos-costo-vida-chile
+1. Clonar el repositorio y abrir una terminal en su raíz.
+2. En R, instalar y restaurar el entorno:
+
+   ```r
+   install.packages("renv")
+   renv::restore()
+   ```
+
+3. Descargar los microdatos directamente desde las instituciones productoras y ubicarlos bajo `data/raw/{chile,brasil,argentina}/`. No suba microdatos restringidos ni archivos pesados al repositorio.
+4. Consulte [docs/DATOS.md](docs/DATOS.md) antes de ejecutar los análisis. Deben incorporarse y verificarse las series de costo de vida para los períodos y territorios comparados.
+
+## Flujos de trabajo
+
+### Revisión bibliográfica
+
+Desde la raíz del proyecto, ejecute en R:
+
+```r
+source("scripts/00_lit_review/01_deduplicar.r")
+source("scripts/00_lit_review/02_prisma_flowchart.R")
 ```
 
-2. Restaurar el entorno con `renv`:
-```R
-install.packages("renv")
-renv::restore()
+El primer script necesita los lotes bibliográficos de Web of Science en `data/raw/bib_raw/`; genera registros procesados en `output/` y `zotero/`. El segundo requiere las métricas generadas por el primero.
+
+El último flujo reproducible identificó 3.982 registros, eliminó 18 duplicados y retuvo 3.750 tras excluir automáticamente 214. La selección manual y el número final de estudios incluidos siguen pendientes; tener DOI no equivale a disponer del texto completo ni a cumplir criterios de inclusión.
+
+### Armonización inicial de encuestas
+
+Desde la raíz del repositorio, ejecute:
+
+```powershell
+Rscript scripts/01_data_analysis/r/01_harmonize_households.R
 ```
 
-3. Ejecutar el pipeline:
-```R
-# En orden de dependencia:
-source("scripts/01_carga_datos.R")
-source("scripts/02_limpieza_datos.R")
-source("scripts/03_analisis_exploratorio.R")
-source("scripts/04_visualizaciones.R")
+El script crea una base local por país en `data/processed/`: CASEN 2024, PNAD Contínua 2025 (visita 1; solo capitales estatales) y EPH 1T2026 (Gran Buenos Aires). Requiere los microdatos locales indicados en [docs/DATOS.md](docs/DATOS.md). No calcula cobertura de canastas: aún deben documentarse y emparejarse valores compatibles por período, unidad y territorio. El archivo PNAD del primer trimestre de 2026 no se procesa con el diccionario de 2025.
+
+### Encuesta CASEN en Stata
+
+Abra Stata, sitúese en la raíz del repositorio y ejecute:
+
+```stata
+do scripts/01_data_analysis/stata/proc_rojas_murua_vicente.do
 ```
 
-## 📊 Dependencias Principales
+Este flujo conserva el análisis descriptivo de CASEN 2024 y genera tablas LaTeX y un gráfico. La armonización inicial de los tres países se ejecuta por separado con el script R anterior; no se deben interpretar las salidas de CASEN como resultados de los tres países.
 
-- **tidyverse** (2.0.0) - Manipulación y visualización de datos
-- **readxl** (1.4.3) - Lectura de archivos Excel
-- **janitor** (2.2.0) - Limpieza de datos
-- **ggplot2** - Visualizaciones avanzadas
-- **plotly** - Gráficos interactivos
-- **knitr** - Generación de reportes
+### Presentación
 
-Ver [renv.lock](renv.lock) para la lista completa de dependencias y versiones.
+Desde la carpeta `presentaciones/`, ejecute:
 
-## 📝 Flujo de Trabajo
+```powershell
+quarto render seminario-ingresos-costo-vida-latinoamerica.qmd
+```
 
-### Scripts Principales
+La fuente es el archivo `.qmd`; el `.html` es su versión renderizada. Los bloques que calculan indicadores de asequibilidad necesitan las bases y series oficiales especificadas en [docs/DATOS.md](docs/DATOS.md).
 
-| Script | Descripción | Entrada | Salida |
-|--------|-------------|---------|--------|
-| `01_carga_datos.R` | Carga datos de fuentes | - | `data/raw/` |
-| `02_limpieza_datos.R` | Limpia y transforma | `data/raw/` | `data/processed/` |
-| `03_analisis_exploratorio.R` | Análisis exploratorio | `data/processed/` | Estadísticas básicas |
-| `04_visualizaciones.R` | Genera gráficos | `data/processed/` | `output/` |
+### Tesis
 
-## 🤝 Contribución
+Abra `latex/main.tex` en LaTeX Workshop o compile desde `latex/` con `latexmk -pdf main.tex`. Los archivos auxiliares de compilación se regeneran y están excluidos de Git.
 
-Las contribuciones son bienvenidas. Por favor, consulta [CONTRIBUIR.md](docs/CONTRIBUIR.md) para detalles sobre el proceso de contribución.
+## Reproducibilidad y límites
 
-## 📄 Licencia
+- Las encuestas tienen poblaciones, diseños muestrales, coberturas geográficas, conceptos de ingreso y períodos de referencia distintos. Documente cada decisión de armonización.
+- Un valor nominal en pesos chilenos, reales brasileños o pesos argentinos no es comparable por sí solo. Use una medida oficial de costo de vida de cada país para el indicador de cobertura y no interprete esa razón como equivalencia entre canastas nacionales.
+- Chile y Argentina cuentan con series oficiales de canastas, con diferencias de definición y cobertura. Brasil no tiene una canasta monetaria equivalente publicada por IBGE en los insumos revisados; la canasta DIEESE es una fuente independiente y específica por ciudad, no una estadística gubernamental nacional. No la presente como si fuera equivalente a las canastas oficiales de los otros países.
+- Los microdatos, archivos procesados y resultados con datos personales o condiciones de uso institucional deben permanecer fuera de Git; véanse las condiciones de las respectivas fuentes.
 
-Este proyecto está bajo la licencia MIT. Ver LICENSE para más detalles.
+## Licencia y uso
 
-## 👤 Autor
+Consulte las condiciones de uso de cada fuente de datos. No se especifica una licencia de software en este repositorio; no asuma que los microdatos oficiales pueden redistribuirse junto con el código.
 
-Creado para análisis de datos económicos de Chile.
+## Autoría
 
-## 📞 Contacto
-
-Para preguntas o sugerencias, abre un issue en el repositorio. 
+Proyecto de tesis de Vicente Rojas Murúa, Facultad de Ciencias Sociales, Universidad de Chile.
